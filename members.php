@@ -1,28 +1,13 @@
 <?php
 /**
  * Plugin Name: Members
- * Plugin URI:  https://themehybrid.com/plugins/members
+ * Plugin URI:  https://github.com/luispaiva/members
  * Description: A user and role management plugin that puts you in full control of your site's permissions. This plugin allows you to edit your roles and their capabilities, clone existing roles, assign multiple roles per user, block post content, or even make your site completely private.
  * Version:     2.2.0
  * Author:      Justin Tadlock
  * Author URI:  https://themehybrid.com
  * Text Domain: members
  * Domain Path: /lang
- *
- * The members plugin was created because the WordPress community is lacking a solid permissions
- * plugin that is both open source and works completely within the confines of the APIs in WordPress.
- * But, the plugin is so much more than just a plugin to control permissions.  It is meant to extend
- * WordPress by making user, role, and content management as simple as using WordPress itself.
- *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
- * General Public License as published by the Free Software Foundation; either version 2 of the License,
- * or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
- * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * You should have received a copy of the GNU General Public License along with this program; if not,
- * write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  *
  * @package   Members
  * @version   2.2.0
@@ -82,6 +67,7 @@ final class Members_Plugin {
 	 *
 	 * @since  1.0.0
 	 * @access public
+	 *
 	 * @return object
 	 */
 	public static function get_instance() {
@@ -89,7 +75,7 @@ final class Members_Plugin {
 		static $instance = null;
 
 		if ( is_null( $instance ) ) {
-			$instance = new self;
+			$instance = new self();
 			$instance->setup();
 			$instance->includes();
 			$instance->setup_actions();
@@ -103,6 +89,7 @@ final class Members_Plugin {
 	 *
 	 * @since  1.0.0
 	 * @access private
+	 *
 	 * @return void
 	 */
 	private function __construct() {}
@@ -112,7 +99,8 @@ final class Members_Plugin {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @return void
+	 *
+	 * @return string
 	 */
 	public function __toString() {
 		return 'members';
@@ -123,6 +111,7 @@ final class Members_Plugin {
 	 *
 	 * @since  1.0.0
 	 * @access public
+	 *
 	 * @return void
 	 */
 	public function __clone() {
@@ -134,6 +123,7 @@ final class Members_Plugin {
 	 *
 	 * @since  1.0.0
 	 * @access public
+	 *
 	 * @return void
 	 */
 	public function __wakeup() {
@@ -145,6 +135,7 @@ final class Members_Plugin {
 	 *
 	 * @since  1.0.0
 	 * @access public
+	 *
 	 * @return null
 	 */
 	public function __call( $method = '', $args = array() ) {
@@ -158,13 +149,14 @@ final class Members_Plugin {
 	 *
 	 * @since  1.0.0
 	 * @access private
+	 *
 	 * @return void
 	 */
 	private function setup() {
 
 		// Main plugin directory path and URI.
 		$this->dir = trailingslashit( plugin_dir_path( __FILE__ ) );
-		$this->uri  = trailingslashit( plugin_dir_url(  __FILE__ ) );
+		$this->uri = trailingslashit( plugin_dir_url( __FILE__ ) );
 	}
 
 	/**
@@ -172,6 +164,7 @@ final class Members_Plugin {
 	 *
 	 * @since  1.0.0
 	 * @access private
+	 *
 	 * @return void
 	 */
 	private function includes() {
@@ -187,60 +180,60 @@ final class Members_Plugin {
 		}
 
 		// Load class files.
-		require_once( $this->dir . 'inc/class-capability.php' );
-		require_once( $this->dir . 'inc/class-cap-group.php'  );
-		require_once( $this->dir . 'inc/class-registry.php'   );
-		require_once( $this->dir . 'inc/class-role-group.php' );
-		require_once( $this->dir . 'inc/class-role.php'       );
+		require_once $this->dir . 'inc/class-capability.php';
+		require_once $this->dir . 'inc/class-cap-group.php';
+		require_once $this->dir . 'inc/class-registry.php';
+		require_once $this->dir . 'inc/class-role-group.php';
+		require_once $this->dir . 'inc/class-role.php';
 
 		// Load includes files.
-		require_once( $this->dir . 'inc/functions.php'                     );
-		require_once( $this->dir . 'inc/functions-admin-bar.php'           );
-		require_once( $this->dir . 'inc/functions-capabilities.php'        );
-		require_once( $this->dir . 'inc/functions-cap-groups.php'          );
-		require_once( $this->dir . 'inc/functions-content-permissions.php' );
-		require_once( $this->dir . 'inc/functions-deprecated.php'          );
-		require_once( $this->dir . 'inc/functions-options.php'             );
-		require_once( $this->dir . 'inc/functions-private-site.php'        );
-		require_once( $this->dir . 'inc/functions-roles.php'               );
-		require_once( $this->dir . 'inc/functions-role-groups.php'         );
-		require_once( $this->dir . 'inc/functions-shortcodes.php'          );
-		require_once( $this->dir . 'inc/functions-users.php'               );
-		require_once( $this->dir . 'inc/functions-widgets.php'             );
+		require_once $this->dir . 'inc/functions.php';
+		require_once $this->dir . 'inc/functions-admin-bar.php';
+		require_once $this->dir . 'inc/functions-capabilities.php';
+		require_once $this->dir . 'inc/functions-cap-groups.php';
+		require_once $this->dir . 'inc/functions-content-permissions.php';
+		require_once $this->dir . 'inc/functions-deprecated.php';
+		require_once $this->dir . 'inc/functions-options.php';
+		require_once $this->dir . 'inc/functions-private-site.php';
+		require_once $this->dir . 'inc/functions-roles.php';
+		require_once $this->dir . 'inc/functions-role-groups.php';
+		require_once $this->dir . 'inc/functions-shortcodes.php';
+		require_once $this->dir . 'inc/functions-users.php';
+		require_once $this->dir . 'inc/functions-widgets.php';
 
 		// Load template files.
-		require_once( $this->dir . 'inc/template.php' );
+		require_once $this->dir . 'inc/template.php';
 
 		// Load admin files.
 		if ( is_admin() ) {
 
 			// General admin functions.
-			require_once( $this->dir . 'admin/functions-admin.php' );
-			require_once( $this->dir . 'admin/functions-help.php'  );
+			require_once $this->dir . 'admin/functions-admin.php';
+			require_once $this->dir . 'admin/functions-help.php';
 
 			// Plugin settings.
-			require_once( $this->dir . 'admin/class-settings.php' );
+			require_once $this->dir . 'admin/class-settings.php';
 
 			// User management.
-			require_once( $this->dir . 'admin/class-manage-users.php' );
-			require_once( $this->dir . 'admin/class-user-edit.php'    );
-			require_once( $this->dir . 'admin/class-user-new.php'     );
+			require_once $this->dir . 'admin/class-manage-users.php';
+			require_once $this->dir . 'admin/class-user-edit.php';
+			require_once $this->dir . 'admin/class-user-new.php';
 
 			// Edit posts.
-			require_once( $this->dir . 'admin/class-meta-box-content-permissions.php' );
+			require_once $this->dir . 'admin/class-meta-box-content-permissions.php';
 
 			// Role management.
-			require_once( $this->dir . 'admin/class-manage-roles.php'          );
-			require_once( $this->dir . 'admin/class-roles.php'                 );
-			require_once( $this->dir . 'admin/class-role-edit.php'             );
-			require_once( $this->dir . 'admin/class-role-new.php'              );
-			require_once( $this->dir . 'admin/class-meta-box-publish-role.php' );
-			require_once( $this->dir . 'admin/class-meta-box-custom-cap.php'   );
+			require_once $this->dir . 'admin/class-manage-roles.php';
+			require_once $this->dir . 'admin/class-roles.php';
+			require_once $this->dir . 'admin/class-role-edit.php';
+			require_once $this->dir . 'admin/class-role-new.php';
+			require_once $this->dir . 'admin/class-meta-box-publish-role.php';
+			require_once $this->dir . 'admin/class-meta-box-custom-cap.php';
 
 			// Edit capabilities tabs and groups.
-			require_once( $this->dir . 'admin/class-cap-tabs.php'       );
-			require_once( $this->dir . 'admin/class-cap-section.php'    );
-			require_once( $this->dir . 'admin/class-cap-control.php'    );
+			require_once $this->dir . 'admin/class-cap-tabs.php';
+			require_once $this->dir . 'admin/class-cap-section.php';
+			require_once $this->dir . 'admin/class-cap-control.php';
 		}
 	}
 
@@ -249,12 +242,13 @@ final class Members_Plugin {
 	 *
 	 * @since  1.0.0
 	 * @access private
+	 *
 	 * @return void
 	 */
 	private function setup_actions() {
 
 		// Internationalize the text strings used.
-		add_action( 'plugins_loaded', array( $this, 'i18n' ), 2 );
+		add_action( 'plugins_loaded', array( $this, 'i18n' ) );
 
 		// Register activation hook.
 		register_activation_hook( __FILE__, array( $this, 'activation' ) );
@@ -265,11 +259,11 @@ final class Members_Plugin {
 	 *
 	 * @since  1.0.0
 	 * @access public
+	 *
 	 * @return void
 	 */
 	public function i18n() {
-
-		load_plugin_textdomain( 'members', false, trailingslashit( dirname( plugin_basename( __FILE__ ) ) ) . 'lang' );
+		load_textdomain( 'members', WP_CONTENT_DIR . '/languages/plugins/members-permissions-' . determine_locale() . '.mo' );
 	}
 
 	/**
@@ -277,6 +271,7 @@ final class Members_Plugin {
 	 *
 	 * @since  1.0.0
 	 * @access public
+	 *
 	 * @return void
 	 */
 	public function activation() {
@@ -298,14 +293,14 @@ final class Members_Plugin {
 		if ( ! empty( $role ) ) {
 
 			$role->add_cap( 'restrict_content' ); // Edit per-post content permissions.
-			$role->add_cap( 'list_roles'       ); // View roles in backend.
+			$role->add_cap( 'list_roles' ); // View roles in backend.
 
 			// Do not allow administrators to edit, create, or delete roles
 			// in a multisite setup. Super admins should assign these manually.
 			if ( ! is_multisite() ) {
 				$role->add_cap( 'create_roles' ); // Create new roles.
 				$role->add_cap( 'delete_roles' ); // Delete existing roles.
-				$role->add_cap( 'edit_roles'   ); // Edit existing roles/caps.
+				$role->add_cap( 'edit_roles' ); // Edit existing roles/caps.
 			}
 		}
 	}
@@ -315,7 +310,8 @@ final class Members_Plugin {
 	 *
 	 * @since  2.0.1
 	 * @access private
-	 * @return void
+	 *
+	 * @return string
 	 */
 	private function get_min_php_message() {
 
@@ -332,6 +328,7 @@ final class Members_Plugin {
 	 *
 	 * @since  2.0.1
 	 * @access public
+	 *
 	 * @return void
 	 */
 	public function php_admin_notice() {
@@ -353,6 +350,7 @@ final class Members_Plugin {
  *
  * @since  1.0.0
  * @access public
+ *
  * @return object
  */
 function members_plugin() {
